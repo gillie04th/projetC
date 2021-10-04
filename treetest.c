@@ -1,4 +1,7 @@
 /*
+
+https://math.univ-angers.fr/~jaclin/_site2022_K7h0q_lpll/C/2022/evaluation/projet2022.html
+
 Ecrire 2 fonctions : load qui charge en mémoire, dans une structure de données adaptée, une arborescence de répertoires, et search qui localise les occurrences d’une entrée donnée (dont le nom est fourni en argument) dans la structure de données précédente.
 
 Créer une bibliothèque contenant ces 2 fonctions (et éventuellement d’autres fonctions ayant un potentiel de réutilisation).
@@ -19,13 +22,15 @@ Faire en sorte que le programme utilise ce fichier de configuration.
 Rédiger un Makefile pour la bibliothèque et un autre pour le programme.
 */
 
-void treetest(char filename[]){
+void treetest(char filename){
 
 }
 
 int main(int argc, char const *argv[])
 {
 	/* code */
+
+	treetest(argv[1]);
 
 	return 0;
 }
