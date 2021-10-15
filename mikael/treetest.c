@@ -28,6 +28,10 @@ Rédiger un Makefile pour la bibliothèque et un autre pour le programme.*/
 #define ORIGINAL "tree.conf" //sans commentaire ou ligne blance
 #define L 60
 
+void treetest(char filename){
+
+}
+
 int main()
 {
   FILE *in;
@@ -45,7 +49,7 @@ int main()
       printf("%s %s \n", s2, s3);
   
   }
-
+ // treetest(argv[1]);
   fclose(in) ;
   return 0; 
 }
