@@ -38,11 +38,11 @@ int main()
   char s[L], s2[L], s3[L];
  // int nl = 0 ;
 
-  in = fopen(ORIGINAL,"r") ;
+  in = fopen(ORIGINAL,"r") ; // fopen permet l'ouverture d'un fichier de données qui se fait via le type FILE *
   if (in==NULL) { perror(ORIGINAL) ; return 1 ; }
   
  
-  while(fgets(s,L-1,in)!=NULL)
+  while(fgets(s,L-1,in)!=NULL) // fgets permet la lecture d'un fichier de données qui se fait via le type FILE *
   {
     s[strlen(s)-1]='\0';
     if(parse(s, s2, s3))
@@ -50,6 +50,6 @@ int main()
   
   }
  // treetest(argv[1]);
-  fclose(in) ;
+  fclose(in) ; //permet la fermeture d'un fichier de données qui se fait via le type FILE *
   return 0; 
 }
