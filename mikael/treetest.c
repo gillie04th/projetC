@@ -47,9 +47,14 @@ int main()
     s[strlen(s)-1]='\0';
     if(parse(s, s2, s3))
       printf("%s %s \n", s2, s3);
-  
+	  
+    //if(search())
+    //if(load())
+	  
   }
- // treetest(argv[1]);
+	
+ // treetest(argv[1]); //Pas sur d'utiliser comme cela, l'idée est d'appeler treetest et d'afficher l'arborescence de l'argument en ligne de commande
+	
   fclose(in) ; //permet la fermeture d'un fichier de données qui se fait via le type FILE *
   return 0; 
 }
