@@ -33,10 +33,10 @@ int isDirectory(const char *path) {   //structure pour reconnaitre un repertoire
 */
 //faire fonction pour tester
 
-void search();
+void search(); //Pas encore finis
 
-void load();
+void load(); //pas encore finis
 
 typedef char string[N];
 
-int parse(const char *src, char *v1, char *v2);
+int parse(const char *src, char *v1, char *v2); //permet d'appeler la fonction parse à partir de treelib
