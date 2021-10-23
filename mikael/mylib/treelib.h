@@ -16,6 +16,23 @@
 #define FAUX 0
 #define N 11
 
+/*
+int is_regular_file(const char *path)  //structure pour reconnaitre un fichier
+{
+    struct stat path_stat;
+    stat(path, &path_stat);
+    return S_ISREG(path_stat.st_mode);
+}
+
+int isDirectory(const char *path) {   //structure pour reconnaitre un repertoire
+   struct stat statbuf;
+   if (stat(path, &statbuf) != 0)
+       return 0;
+   return S_ISDIR(statbuf.st_mode);
+}
+*/
+//faire fonction pour tester
+
 void search();
 
 void load();
