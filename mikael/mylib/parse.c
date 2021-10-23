@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "mylib.h"
+#include "treelib.h"
 
 int parse(const char *src, char *v1, char *v2){
         if (sscanf(src,"%[^= ] = %[^=]", v1, v2) == 2)
