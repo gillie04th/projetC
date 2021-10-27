@@ -37,7 +37,9 @@ int main()
   FILE *in;
   char s[L], s2[L], s3[L];
  // int nl = 0 ;
-
+  DIR *dp; //
+  struct dirent *dirp; //
+	
   in = fopen(ORIGINAL,"r") ; // fopen permet l'ouverture d'un fichier de données qui se fait via le type FILE *
   if (in==NULL) { perror(ORIGINAL) ; return 1 ; }
   
@@ -52,6 +54,26 @@ int main()
     //if(load())
 	  
   }
+   printf("\n");
+ 
+   if (argc != 2) {
+       fprintf(stderr, "Usage: ./program directory_name\n");
+       exit(EXIT_FAILURE);
+   }
+
+   dp = opendir(argv[1]);
+
+   if(!dp){
+
+     printf("répertoire introuvable ou manque de permission\n");
+     return 1;
+   }
+   while ((dirp = readdir(dp)) != NULL){
+      printf("%s\n", dirp->d_name); //liste les entrées du répertoire spécifié sur la ligne de commande.
+   }
+
+  closedir(dp);
+  exit(EXIT_SUCCESS);	
 	
  // treetest(argv[1]); //Pas sur d'utiliser comme cela, l'idée est d'appeler treetest et d'afficher l'arborescence de l'argument en ligne de commande
 	
