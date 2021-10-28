@@ -31,29 +31,31 @@ int main()
   string path = "/var";
 
   Tree noeud;
-  noeud=(Tree)malloc(sizeof(struct Node));
+  noeud = (Tree)malloc(sizeof(struct Node));
 
+  load(noeud, path);
 
-  load(&noeud, path);
-printf("here\n");
   Folder tmp;
+  
   tmp = noeud->Folders;
 
   if (noeud != NULL)
   {
-    printf("noeud est plein\n");//
+    printf("noeud est plein\n"); ////
     if (noeud->Folders != NULL)
     {
-      printf("noeud->Folders est plein\n");
+      printf("noeud->Folders : %s|%s\n", noeud->Folders->path, noeud->Folders->name);
       while (tmp != NULL)
       {
-        printf("%s", tmp->name);
+        //printf("%s", tmp->name);
         tmp = tmp->nextFolder;
       }
     }
-    else printf("noeud->Folders est null\n");
+    else
+      printf("noeud->Folders est null\n");
   }
-  else printf("noeud est null\n");
+  else
+    printf("noeud est null\n");
 
   //printf("%d\n%d\n", PATH_MAX, FILENAME_MAX);
 

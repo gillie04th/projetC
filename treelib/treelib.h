@@ -15,14 +15,14 @@
 #define FAUX 0
 #define NSTRING 256
 
-typedef char string[NSTRING];
+typedef char string[PATH_MAX];
 
 struct Element
 {
   struct Node *parent;
   struct Element *nextFolder;
-  char * path[PATH_MAX];
-  char * name[FILENAME_MAX];
+  string path;
+  string name;
 };
 typedef struct Element * Folder;
 
@@ -38,6 +38,6 @@ int isDirectory(string path);
 
 int search();
 
-int load(Tree *n,string path);
+int load(Tree parent,string path);
 
 int parse(const char *src, char *v1, char *v2);
