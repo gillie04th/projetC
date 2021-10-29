@@ -35,20 +35,22 @@ int main()
 
   load(noeud, path);
 
-  Folder tmp;
-  
-  tmp = noeud->Folders;
+  Folder tmp, f;
+
+  f = noeud->Folders;
 
   if (noeud != NULL)
   {
-    printf("noeud est plein\n"); ////
-    if (noeud->Folders != NULL)
+    printf("noeud est plein\n"); /////
+    if (f != NULL)
     {
       printf("noeud->Folders : %s|%s\n", noeud->Folders->path, noeud->Folders->name);
-      while (tmp != NULL)
+      while (f != tmp)
       {
-        //printf("%s", tmp->name);
-        tmp = tmp->nextFolder;
+        printf("%s/%s\n", f->path, f->name);
+        tmp = f;
+        if (f->nextFolder != NULL)
+          f = f->nextFolder;
       }
     }
     else
@@ -58,6 +60,8 @@ int main()
     printf("noeud est null\n");
 
   //printf("%d\n%d\n", PATH_MAX, FILENAME_MAX);
+
+  printf("end");
 
   return 0;
 }

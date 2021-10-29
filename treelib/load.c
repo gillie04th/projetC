@@ -8,7 +8,7 @@
 
 //charge en mémoire, dans une structure de données adaptée, une arborescence de répertoires
 
-int load(Tree parent, string path)
+void load(Tree parent, string path)
 {
   DIR *dp;
   struct dirent *dirp;
@@ -37,16 +37,22 @@ int load(Tree parent, string path)
     exit(EXIT_FAILURE);
   }
 
-  Folder tmpFolder,folder;
+  Folder tmpFolder, folder;
   folder = (Folder)malloc(sizeof(struct Element));
   while ((dirp = readdir(dp)) != NULL)
   {
-    folder->parent = parent;
-    strcpy(folder->name,dirp->d_name);
-    strcpy(folder->path, path);
-    //folder->nextFolder=tmpFolder;
-    parent->Folders=folder;
-    tmpFolder=folder;
+    if (dirp->d_name != NULL)
+    {
+      tmpFolder = (Folder)malloc(sizeof(struct Element));
+      parent->Folders = tmpFolder;
+      tmpFolder->parent = parent;
+      strcpy(tmpFolder->name, dirp->d_name);
+      strcpy(tmpFolder->path, path);
+
+      tmpFolder->nextFolder = folder;
+      //printf("%s\n", folder->nextFolder->name);
+      folder = tmpFolder;
+    }
   }
   free(tmpFolder);
 
@@ -54,8 +60,6 @@ int load(Tree parent, string path)
     perror("closedir");
 
   //exit(EXIT_SUCCESS);
-  
-  return 0;
 }
 
 /*

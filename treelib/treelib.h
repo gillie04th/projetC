@@ -38,6 +38,6 @@ int isDirectory(string path);
 
 int search();
 
-int load(Tree parent,string path);
+void load(Tree parent,string path);
 
 int parse(const char *src, char *v1, char *v2);
