@@ -53,7 +53,7 @@ int main()
 
   if (origin != NULL)
   {
-    printf("origin est plein\n"); /////////
+    printf("origin est plein\n"); //////////
     if (folder != NULL)
     {
       printf("origin->path : %s\n", origin->path);
