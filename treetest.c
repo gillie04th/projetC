@@ -22,6 +22,13 @@ Rédiger un Makefile pour la bibliothèque et un autre pour le programme.*/
 #define ORIGINAL "tree.conf" //sans commentaire ou ligne blanche
 #define L 60
 
+void displayTree(Folder folder)
+{
+  folder->nextFolder != NULL ? displayTree(folder->nextFolder) : NULL;
+  folder->subFolder != NULL ? displayTree(folder->subFolder) : NULL;
+  printf("%s\n", folder->path);
+}
+
 void treetest(char filename)
 {
 }
@@ -29,39 +36,40 @@ void treetest(char filename)
 int main()
 {
   string path = "/var";
+  Folder folder, origin;
+  origin = (Folder)malloc(sizeof(struct Element));
 
-  Tree noeud;
-  noeud = (Tree)malloc(sizeof(struct Node));
+  load(origin, path);
 
-  load(noeud, path);
+  folder = origin->subFolder;
 
-  Folder tmp, f;
+  //printf("%d\n", isSymlink(path));
 
-  f = noeud->Folders;
-
-  if (noeud != NULL)
+  if (origin != NULL)
   {
-    printf("noeud est plein\n"); /////
-    if (f != NULL)
+    printf("origin est plein\n"); /////////
+    if (folder != NULL)
     {
-      printf("noeud->Folders : %s|%s\n", noeud->Folders->path, noeud->Folders->name);
-      while (f != tmp)
+      printf("origin->path : %s\n", origin->path);
+      printf("origin->subFolder->path : %s\n", origin->subFolder->path);
+      while (strlen(folder->path) > 1)
       {
-        printf("%s/%s\n", f->path, f->name);
-        tmp = f;
-        if (f->nextFolder != NULL)
-          f = f->nextFolder;
+        printf("%s\n", folder->name);
+          folder = folder->nextFolder;
       }
+      //displayTree(origin);
     }
     else
-      printf("noeud->Folders est null\n");
+      printf("origin->Folders est null\n");
   }
   else
-    printf("noeud est null\n");
+    printf("origin est null\n");
 
   //printf("%d\n%d\n", PATH_MAX, FILENAME_MAX);
 
-  printf("end");
+  //unload(origin);
+
+  printf("end\n");
 
   return 0;
 }

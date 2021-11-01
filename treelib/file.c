@@ -16,3 +16,19 @@ int isDirectory(string path) {
        return 0;
    return S_ISDIR(statbuf.st_mode);
 }
+
+int isSymlink(string filename)
+{
+    struct stat p_statbuf;
+
+    if (lstat(filename, &p_statbuf) < 0) {  /* if error occured */
+        perror("calling stat()");
+        exit(1);  /* end progam here */
+    }
+
+    if (S_ISLNK(p_statbuf.st_mode) == 1) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

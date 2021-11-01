@@ -11,33 +11,36 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-#define VRAI 1
-#define FAUX 0
-#define NSTRING 256
-
 typedef char string[PATH_MAX];
 
 struct Element
 {
-  struct Node *parent;
+  //struct Node *parent;
   struct Element *nextFolder;
+  struct Element *subFolder;
   string path;
   string name;
 };
 typedef struct Element * Folder;
 
+/*
 struct Node
 {
   struct Element *Folders;
 };
 typedef struct Node * Tree;
+*/
 
 int isFile(string path);
 
 int isDirectory(string path);
 
+int isSymlink(string filename);
+
 int search();
 
-void load(Tree parent,string path);
+void load(Folder parent,string path);
+
+void unload(Folder parent);
 
 int parse(const char *src, char *v1, char *v2);
