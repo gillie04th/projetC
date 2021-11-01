@@ -19,7 +19,6 @@ void load(Folder parent, string path)
 {
   DIR *dp;
   struct dirent *dirp;
-  Folder tmpFolder, folder;
 
   if (path == NULL)
   {
@@ -27,16 +26,19 @@ void load(Folder parent, string path)
     exit(EXIT_FAILURE);
   }
   strcpy(parent->path, path);
-
+  int i = 0, j = 0;
   errno = 0;
   if ((dp = opendir(path)) != NULL)
   {
+    Folder tmpFolder = NULL, folder;
     while ((dirp = readdir(dp)) != NULL)
     {
-      printf("%s\n", dirp->d_name);
+      i++;
+      //printf("%d | %d\n", strcmp(dirp->d_name, "."), strcmp(dirp->d_name, ".."));
       //printf("while\n");
-      if (strcmp(dirp->d_name, "/") != 0 && strcmp(dirp->d_name, ".") != 0 && strcmp(dirp->d_name, "..") != 0 && dirp->d_type == 4)
+      if (strcmp(dirp->d_name, ".") != 0 && strcmp(dirp->d_name, "..") != 0 && dirp->d_type == 4)
       {
+        j++;
         //printf("if\n");
         folder = (Folder)malloc(sizeof(struct Element));
         //tmpFolder = (Folder)malloc(sizeof(struct Element));
@@ -50,25 +52,18 @@ void load(Folder parent, string path)
 
         strcpy(folder->name, dirp->d_name);
         strcpy(folder->path, subPath);
-        if (tmpFolder == NULL)
-        {
-          folder->nextFolder = NULL;
-        }
-        else
-        {
-          folder->nextFolder = tmpFolder;
-        }
+        folder->nextFolder = tmpFolder;
         //printf("%s\n", folder->path);
-        //printf("%s\n", dirp->d_name);
+        //printf("%s\n", folder->path);
         tmpFolder = folder;
 
-        if (strcmp(folder->path, "") != 0)
-          //load(folder, folder->path);
-
-          parent->subFolder = folder;
+        //if (strcmp(folder->path, "") != 0)
+          load(folder, folder->path);
       }
-      printf("%s | %s\n", folder->path, tmpFolder->path);
+      //printf("i = %d | j = %d | %s\n", i, j, dirp->d_name);
     }
+    printf("folder-> path : %s\n", folder->path);
+    parent->subFolder = folder;
 
     if (closedir(dp) == -1)
       perror("closedir");
@@ -92,5 +87,5 @@ void load(Folder parent, string path)
     }
     //exit();
   }
-  /**/
+  */
 }

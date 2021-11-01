@@ -24,9 +24,14 @@ Rédiger un Makefile pour la bibliothèque et un autre pour le programme.*/
 
 void displayTree(Folder folder)
 {
-  folder->nextFolder != NULL ? displayTree(folder->nextFolder) : NULL;
-  folder->subFolder != NULL ? displayTree(folder->subFolder) : NULL;
-  printf("%s\n", folder->path);
+  if (folder != NULL)
+  {
+    printf("%s\n", folder->path);
+    //if(folder->subFolder != NULL)
+    displayTree(folder->subFolder);
+    //if(folder->nextFolder != NULL)
+    displayTree(folder->nextFolder);
+  }
 }
 
 void treetest(char filename)
@@ -35,8 +40,9 @@ void treetest(char filename)
 
 int main()
 {
+  printf("==== START ====\n");
   string path = "/var";
-  Folder folder, origin;
+  Folder subFolder, folder, origin;
   origin = (Folder)malloc(sizeof(struct Element));
 
   load(origin, path);
@@ -47,17 +53,23 @@ int main()
 
   if (origin != NULL)
   {
-    printf("origin est plein\n"); /////////
+    printf("origin est plein\n"); /////////////////
     if (folder != NULL)
     {
       printf("origin->path : %s\n", origin->path);
-      printf("origin->subFolder->path : %s\n", origin->subFolder->path);
-      while (strlen(folder->path) > 1)
+      //printf("origin->subFolder->path : %s\n", origin->subFolder->path);
+      /*do
       {
+        folder = folder->nextFolder;
         printf("%s\n", folder->name);
-          folder = folder->nextFolder;
-      }
-      //displayTree(origin);
+        do
+        {
+          subFolder = folder->subFolder;
+          printf("%s\n", subFolder->name);
+        } while (folder != NULL);
+      } while (folder != NULL);
+      */
+      displayTree(origin);
     }
     else
       printf("origin->Folders est null\n");
@@ -69,7 +81,7 @@ int main()
 
   //unload(origin);
 
-  printf("end\n");
+  printf("==== END ====\n");
 
   return 0;
 }
