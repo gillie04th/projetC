@@ -53,25 +53,10 @@ int main()
 
   if (origin != NULL)
   {
-    printf("origin est plein\n"); //////
+    printf("origin est plein\n"); /////////
     if (folder != NULL)
     {
       printf("origin->path : %s\n", origin->path);
-      //printf("origin->subFolder->path : %s\n", origin->subFolder->path);
-      /*
-      do
-      {
-        folder = folder->nextFolder;
-        printf("%s\n", folder->name);
-
-        while (folder->subFolder != NULL)
-        {
-          printf("%s\n", folder->name);
-          folder = folder->subFolder;
-        } 
-      
-      } while (folder != NULL);
-      */
       displayTree(origin);
     }
     else
@@ -80,9 +65,7 @@ int main()
   else
     printf("origin est null\n");
 
-  //printf("%d\n%d\n", PATH_MAX, FILENAME_MAX);
-
-  //unload(origin);
+  unload(origin);
 
   printf("==== END ====\n");
 

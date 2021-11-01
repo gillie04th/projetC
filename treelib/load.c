@@ -10,9 +10,16 @@
 
 void unload(Folder parent)
 {
-  unload(parent->subFolder);
-  unload(parent->nextFolder);
-  free(parent);
+  if (parent != NULL)
+  {
+    //printf("start");
+    unload(parent->subFolder);
+    //printf("sub->next");
+    unload(parent->nextFolder);
+    //printf("next->end");
+    free(parent);
+    //printf("end");
+  }
 }
 
 void load(Folder parent, string path)
