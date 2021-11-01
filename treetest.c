@@ -69,5 +69,9 @@ int main()
 
   printf("==== END ====\n");
 
+  printf("\n")
+	  
+  search(1,argv[1]);	// ou  (2,argv[1]);
+	
   return 0;
 }
