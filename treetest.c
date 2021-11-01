@@ -41,11 +41,11 @@ void treetest(char filename)
 int main()
 {
   printf("==== START ====\n");
-  string path = "/var";
   Folder subFolder, folder, origin;
   origin = (Folder)malloc(sizeof(struct Element));
+  strcpy(origin->path,"/var/lib");
 
-  load(origin, path);
+  load(origin, origin->path);
 
   folder = origin->subFolder;
 
@@ -53,20 +53,23 @@ int main()
 
   if (origin != NULL)
   {
-    printf("origin est plein\n"); /////////////////
+    printf("origin est plein\n"); //////
     if (folder != NULL)
     {
       printf("origin->path : %s\n", origin->path);
       //printf("origin->subFolder->path : %s\n", origin->subFolder->path);
-      /*do
+      /*
+      do
       {
         folder = folder->nextFolder;
         printf("%s\n", folder->name);
-        do
+
+        while (folder->subFolder != NULL)
         {
-          subFolder = folder->subFolder;
-          printf("%s\n", subFolder->name);
-        } while (folder != NULL);
+          printf("%s\n", folder->name);
+          folder = folder->subFolder;
+        } 
+      
       } while (folder != NULL);
       */
       displayTree(origin);
