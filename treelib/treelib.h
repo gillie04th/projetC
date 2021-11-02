@@ -43,4 +43,6 @@ void load(Folder parent,string path);
 
 void unload(Folder parent);
 
+void displayTree(Folder folder);
+
 int parse(const char *src, char *v1, char *v2);

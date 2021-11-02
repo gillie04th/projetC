@@ -8,6 +8,18 @@
 
 //charge en mémoire, dans une structure de données adaptée, une arborescence de répertoires
 
+void displayTree(Folder folder)
+{
+  if (folder != NULL)
+  {
+    printf("%s\n", folder->path);
+    //if(folder->subFolder != NULL)
+    displayTree(folder->subFolder);
+    //if(folder->nextFolder != NULL)
+    displayTree(folder->nextFolder);
+  }
+}
+
 void unload(Folder parent)
 {
   if (parent != NULL)

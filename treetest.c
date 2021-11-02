@@ -19,31 +19,14 @@ Rédiger un Makefile pour la bibliothèque et un autre pour le programme.*/
 #include <stdbool.h>
 #include <limits.h>
 
-#define ORIGINAL "tree.conf" //sans commentaire ou ligne blanche
-#define L 60
-
-void displayTree(Folder folder)
-{
-  if (folder != NULL)
-  {
-    printf("%s\n", folder->path);
-    //if(folder->subFolder != NULL)
-    displayTree(folder->subFolder);
-    //if(folder->nextFolder != NULL)
-    displayTree(folder->nextFolder);
-  }
-}
-
-void treetest(char filename)
-{
-}
+#define ConfigFile "tree.conf" //sans commentaire ou ligne blanche
 
 int main()
 {
   printf("==== START ====\n");
   Folder subFolder, folder, origin;
   origin = (Folder)malloc(sizeof(struct Element));
-  strcpy(origin->path,"/var/lib");
+  strcpy(origin->path,"/etc");
 
   load(origin, origin->path);
 
