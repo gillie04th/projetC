@@ -6,10 +6,8 @@ treetest lit d’autres paramètres dans un fichier de configuration tree.conf.
 tree.conf définit différentes variables. A ce stade, on commence par une seule variable rootdir spécifiant la racine de l’arborescence à traiter.
 	Optionnellement, on pourra clarifier le fichier de configuration en autorisant les lignes blanches et les commentaires (sous une forme à choisir).
 exemple de fichier tree.conf autorisant les commentaires
-# racine des répertoires à charger
-rootdir=/var
 Faire en sorte que le programme utilise ce fichier de configuration.
-Rédiger un Makefile pour la bibliothèque et un autre pour le programme.*/
+*/
 
 #include <stdio.h>
 #include <string.h>
@@ -24,37 +22,57 @@ Rédiger un Makefile pour la bibliothèque et un autre pour le programme.*/
 int main()
 {
   printf("==== START ====\n");
+
+  // Initialisation des variables
+  FILE *fichier;
+  string rootdir;
+  string champ;
+  string line;
   Folder subFolder, folder, origin;
+  // Allocation de mémoire pour le répertoire racine
   origin = (Folder)malloc(sizeof(struct Element));
-  strcpy(origin->path,"/etc");
 
-  load(origin, origin->path);
-
-  folder = origin->subFolder;
-
-  //printf("%d\n", isSymlink(path));
-
-  if (origin != NULL)
+  // Ouverture du fichier de configuration et lecture du répertoire source
+  fichier = fopen("tree.conf", "r");
+  while (1)
   {
-    printf("origin est plein\n"); //////////
-    if (folder != NULL)
+    if (fgets(line, 150, fichier) == NULL)
+      break;
+    if (*line == '#') // Si la ligne commence par un # (commentaire)
+      continue; // la ligne est ignorée
+    if (sscanf(line, "rootdir=%s", rootdir) != 4) // Sinon on sélectionne la chaine après "rootdir="
     {
-      printf("origin->path : %s\n", origin->path);
-      displayTree(origin);
+      //printf("error yes\n");
     }
     else
-      printf("origin->Folders est null\n");
+    {
+      //printf("error no\n");
+    }
   }
-  else
-    printf("origin est null\n");
+  //printf("Répertoire racine : %s\n", rootdir);
 
+  // Affectation du chemin au répertoire racine
+  strcpy(origin->path, rootdir);
+
+  // Chargement de l'arbre en mémoire
+  load(origin, origin->path);
+
+  // Tests sur l'arbre
+  if (origin != NULL) // Si la racine est pleine
+  {
+    printf("La racine est pleine ...\n");
+    printf("\nArborescence des répertoires sous %s :\n", origin->path);
+    displayTree(origin);
+  }
+  else // Si elle est vide
+    printf("La racine est vide !\n");
+
+  // Déchargement des données en mémoire
   unload(origin);
+
+  //search(1,argv[1]);	// ou  (2,argv[1]);
 
   printf("==== END ====\n");
 
-  printf("\n");
-	  
-  //search(1,argv[1]);	// ou  (2,argv[1]);
-	
   return 0;
 }

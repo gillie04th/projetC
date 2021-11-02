@@ -3,20 +3,21 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
+// Test si un chemin est un fichier
 int isFile(string path)
 {
     struct stat path_stat;
     stat(path, &path_stat);
     return S_ISREG(path_stat.st_mode);
 }
-
+// Test si un chemin est un dossier
 int isDirectory(string path) {
    struct stat statbuf;
    if (stat(path, &statbuf) != 0)
        return 0;
    return S_ISDIR(statbuf.st_mode);
 }
-
+// Test si un chemin est un lien symbolique
 int isSymlink(string filename)
 {
     struct stat p_statbuf;
