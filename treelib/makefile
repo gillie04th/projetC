@@ -4,8 +4,8 @@
 
 # règles spécifiques
 
-treelib: load.o search.o parse.o file.o
-	ar -rs libtreelib.a load.o search.o parse.o file.o
+treelib: load.o search.o parse.o file.o conf.o
+	ar -rs libtreelib.a load.o search.o parse.o file.o conf.o
 
 search.o: search.c treelib.h
 	gcc -Wall -c search.c
@@ -18,3 +18,6 @@ parse.o: parse.c treelib.h
 
 file.o: file.c treelib.h
 	gcc -Wall -c file.c
+
+conf.o: conf.c treelib.h
+	gcc -Wall -c conf.c

@@ -17,60 +17,62 @@ Faire en sorte que le programme utilise ce fichier de configuration.
 #include <stdbool.h>
 #include <limits.h>
 
-#define ConfigFile "tree.conf" //sans commentaire ou ligne blanche
-
-int main()
+int main(int argc, char *argv[])
 {
   printf("==== START ====\n");
-
   // Initialisation des variables
-  FILE *fichier;
-  string rootdir;
-  string champ;
-  string line;
-  Folder subFolder, folder, origin;
-  // Allocation de mémoire pour le répertoire racine
-  origin = (Folder)malloc(sizeof(struct Element));
+  string rootPath, configFile = "tree.conf";
 
-  // Ouverture du fichier de configuration et lecture du répertoire source
-  fichier = fopen("tree.conf", "r");
-  while (1)
-  {
-    if (fgets(line, 150, fichier) == NULL)
-      break;
-    if (*line == '#') // Si la ligne commence par un # (commentaire)
-      continue; // la ligne est ignorée
-    if (sscanf(line, "rootdir=%s", rootdir) != 4) // Sinon on sélectionne la chaine après "rootdir="
-    {
-      //printf("error yes\n");
-    }
-    else
-    {
-      //printf("error no\n");
-    }
-  }
-  //printf("Répertoire racine : %s\n", rootdir);
+  // Allocation de mémoire pour le répertoire racine
+  Folder TREE = (Folder)malloc(sizeof(struct Element));
+
+  // Chargement des données dans le fichier de configuration
+  loadConf(configFile, &rootPath);
+  printf("Le répertoire racine est %s\n", rootPath);
 
   // Affectation du chemin au répertoire racine
-  strcpy(origin->path, rootdir);
+  strcpy(TREE->path, rootPath);
 
   // Chargement de l'arbre en mémoire
-  load(origin, origin->path);
+  load(TREE, TREE->path);
+  printf("Chargement de l'arbre ...\n");
+  sleep(1);
 
   // Tests sur l'arbre
-  if (origin != NULL) // Si la racine est pleine
+  printf("Test de l'arborescence ...\n");
+  sleep(1);
+  if (TREE != NULL) // Si la racine est pleine
   {
-    printf("La racine est pleine ...\n");
-    printf("\nArborescence des répertoires sous %s :\n", origin->path);
-    displayTree(origin);
+    printf("La racine est pleine.\n");
+    /*
+    printf("\nArborescence des répertoires sous %s :\n", TREE->path);
+    displayTree(TREE);
+    */
   }
   else // Si elle est vide
     printf("La racine est vide !\n");
 
-  // Déchargement des données en mémoire
-  unload(origin);
+  // Test des paramètres entrés dans la ligne de commande
+  if (argc < 2)
+  {
+    printf("Aucun paramètre n'est détecté, aucune recherche ne sera effectuée.\n");
+  }
+  else
+  {
+    if (argc > 2)
+    {
+      printf("Seul le premier paramètre est utilisé.\n");
+      sleep(1);
+      printf("Il correspond au nom du dossier à rechercher.\n");
+    }
+    printf("Recherche de %s dans l'arborescence ...\n", argv[1]);
+    search(TREE, argv[1]);
+  }
 
-  //search(1,argv[1]);	// ou  (2,argv[1]);
+  // Déchargement des données en mémoire
+  printf("Libération de la mémoire ...\n");
+  sleep(1);
+  unload(TREE);
 
   printf("==== END ====\n");
 

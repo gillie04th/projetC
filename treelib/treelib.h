@@ -31,18 +31,12 @@ struct Node
 typedef struct Node * Tree;
 */
 
-int isFile(string path);
-
-int isDirectory(string path);
-
-int isSymlink(string filename);
-
-int search();
-
-void load(Folder parent,string path);
-
+int search(Folder folder, string dirName);
+void load(Folder parent, string path);
 void unload(Folder parent);
-
 void displayTree(Folder folder);
-
+void loadConf(string configFile, string *rootdir);
+int isFile(string path);
+int isDirectory(string path);
+int isSymlink(string filename);
 int parse(const char *src, char *v1, char *v2);
