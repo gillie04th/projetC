@@ -8,8 +8,6 @@
 #include <fcntl.h>  
 #include <dirent.h>
 #include <errno.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 
 typedef char string[PATH_MAX];
 

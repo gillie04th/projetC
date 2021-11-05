@@ -9,11 +9,10 @@ exemple de fichier tree.conf autorisant les commentaires
 Faire en sorte que le programme utilise ce fichier de configuration.
 */
 
+#include "treelib/treelib.h"
 #include <stdio.h>
 #include <string.h>
-#include <readline/readline.h>
 #include <readline/history.h>
-#include "treelib/treelib.h"
 #include <stdbool.h>
 #include <limits.h>
 
