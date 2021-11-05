@@ -1,20 +1,17 @@
-/*
-Ecrire 2 fonctions : load qui charge en mémoire, dans une structure de données adaptée, une arborescence de répertoires, et search qui localise les occurrences d’une entrée donnée (dont le nom est fourni en argument) dans la structure de données précédente.
-Créer une bibliothèque contenant ces 2 fonctions (et éventuellement d’autres fonctions ayant un potentiel de réutilisation).
-Construire un programme treetest pour tester ces 2 fonctions. treetest est appelé avec un nom de fichier en argument (sur la ligne de commande), et écrit les emplacements correspondants.
-treetest lit d’autres paramètres dans un fichier de configuration tree.conf.
-tree.conf définit différentes variables. A ce stade, on commence par une seule variable rootdir spécifiant la racine de l’arborescence à traiter.
-	Optionnellement, on pourra clarifier le fichier de configuration en autorisant les lignes blanches et les commentaires (sous une forme à choisir).
-exemple de fichier tree.conf autorisant les commentaires
-Faire en sorte que le programme utilise ce fichier de configuration.
-*/
-
 #include "treelib/treelib.h"
 #include <stdio.h>
 #include <string.h>
 #include <readline/history.h>
 #include <stdbool.h>
 #include <limits.h>
+
+// Fonction de test des différentes focntionnalités du projet
+
+/** 
+ * Si une erreur de mémoire survient, il est possible que la source soit la configuration de votre machine.
+ * Dans ce cas soit vous résolvez le problèe vous même, soit vous décommentez la ligne 33 du fichier load.c,
+ * à savoir l'instruction "unload(parent->subFolder)".
+ **/
 
 int main(int argc, char *argv[])
 {
