@@ -15,7 +15,7 @@
 
 int main(int argc, char *argv[])
 {
-  printf("==== START ====\n");
+  //printf("==== START ====\n");
   // Initialisation des variables
   string rootPath, configFile = "tree.conf";
 

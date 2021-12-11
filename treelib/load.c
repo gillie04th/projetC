@@ -30,8 +30,10 @@ void unload(Folder parent)
   if (parent != NULL)
   {
     //printf("start");
+    if(parent->subFolder)
     unload(parent->subFolder);
     //printf("sub->next");
+    if(parent->nextFolder)
     unload(parent->nextFolder);
     //printf("next->end");
     free(parent);

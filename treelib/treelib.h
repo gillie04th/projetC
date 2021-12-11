@@ -33,8 +33,15 @@ int search(Folder folder, string dirName);
 void load(Folder parent, string path);
 void unload(Folder parent);
 void displayTree(Folder folder);
-void loadConf(string configFile, string *rootdir);
+// Méthode de configuration
+void loadConf(string configFile, string *returnVal, char * param);
+/*
+void writeText(string filename, string text);
+void writeInt(string filename, int number);
+/**/
+//
 int isFile(string path);
 int isDirectory(string path);
 int isSymlink(string filename);
+//
 int parse(const char *src, char *v1, char *v2);
