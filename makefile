@@ -1,6 +1,6 @@
 # règle implicite
 %: %.c
-	gcc -Wall -o $@ $@.c
+	gcc -Wall -o $@ $@.c -l treelib -L treelib
 
 # règles spécifiques
 

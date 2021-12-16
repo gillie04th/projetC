@@ -14,11 +14,11 @@ void displayTree(Folder folder)
   if (folder != NULL)
   {
     printf("%s\n", folder->path);
-    sleep(1);
-    //if(folder->subFolder != NULL)
+    //sleep(1);
+    if(folder->subFolder != NULL)
     // Passe au sous dossier
     displayTree(folder->subFolder);
-    //if(folder->nextFolder != NULL)
+    if(folder->nextFolder != NULL)
     // Passe au dossier suivant
     displayTree(folder->nextFolder);
   }
@@ -30,10 +30,8 @@ void unload(Folder parent)
   if (parent != NULL)
   {
     //printf("start");
-    if(parent->subFolder)
     unload(parent->subFolder);
     //printf("sub->next");
-    if(parent->nextFolder)
     unload(parent->nextFolder);
     //printf("next->end");
     free(parent);
@@ -63,7 +61,7 @@ void load(Folder parent, string path)
   if ((dp = opendir(path)) != NULL)
   {
     // Initialisation des variables de la boucle
-    Folder tmpFolder = NULL, folder;
+    Folder tmpFolder = NULL, folder = NULL;
     string subPath;
     // Boucle qui parcourt tous les sous dossiers du répertoire parent
     while ((dirp = readdir(dp)) != NULL)
@@ -83,10 +81,12 @@ void load(Folder parent, string path)
         // Affectation de son chemin et de son nom au sous répertoire
         strcpy(folder->path, subPath);
         strcpy(folder->name, dirp->d_name);
+        //printf("%s\n", folder->path);
         // On chaine le précedent dossier au répertoire courrant (NULL dans le premier cas)
         folder->nextFolder = tmpFolder;
         // On garde en mémoire le dossier pour l'utiliser pour chainer les dossiers
         tmpFolder = folder;
+        //printf("tmpFolder = %s, folder = %s\n", tmpFolder->path, folder->path);
         // Chargement de sous-répertoires du répertoire initialisé auparavant
         load(folder, folder->path);
       }

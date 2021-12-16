@@ -2,71 +2,58 @@
 #include <stdio.h>
 #include <signal.h>
 
+// Initialisation des variables
 Folder TREE;
+string confFile = "tree.conf", pidFile, rootDir;
 
-void writeText(string filename, string text)
+void treesearch()
 {
-    // Ouvre le fichier dans lequel écrire
-    FILE *fp = fopen(filename, "w");
-    if (fp == NULL)
-    {
-        printf("%s doit être créer", filename);
-    }
-    // Ecrit le texte dans le fichier
-    fprintf(fp, "%s\n", text);
-
-    // close the file
-    fclose(fp);
-}
-
-void writeInt(string filename, int number)
-{
-    // Ouvre le fichier dans lequel écrire
-    FILE *fp = fopen(filename, "w");
-    printf("writeInt\n");
-    if (fp == NULL)
-    {
-        printf("%s doit être créer\n", filename);
-    }else{
-    // Ecrit le texte dans le fichier
-    fprintf(fp, "%d\n", number);
-
-    // close the file
-    fclose(fp);
-    }
-}
-
-void treeload(int s)
-{
-    pid_t pid = getpid();
-
-    // Initialisation des variables
-    string confFile = "tree.conf", rootDir, dataFile, pidFile;
-    // Chargement des données dans le fichier de configuration
-    loadConf(confFile, &rootDir, "rootdir");
+    string dataFile;
     loadConf(confFile, &dataFile, "datafile");
-    loadConf(confFile, &pidFile, "pidfile");
-    /*
-    // Allocation de mémoire pour le répertoire racine
-    TREE = (Folder)malloc(sizeof(struct Element));
-    // Affectation du chemin au répertoire racine
-    strcpy(TREE->path, rootPath);
-    // Chargement de l'arbre en mémoire
-    load(TREE, TREE->path);
-    /**/
-    writeInt(pidFile, pid);
-
-    //printf("Signal %d bien recu\n", s);
+    if (TREE != NULL)
+        search(TREE, dataFile);
+    else
+        printf("Erreur de chargement du répertoire");
+    printf("treesearch\n");
 }
 
-void treeunload(int s)
+void treeload()
+{
+    if (TREE == NULL)
+    {
+        // Chargement des données dans le fichier de configuration
+        loadConf(confFile, &rootDir, "rootdir");
+        // Allocation de mémoire pour le répertoire racine
+        TREE = (Folder)malloc(sizeof(struct Element));
+        // Affectation du chemin au répertoire racine
+        strcpy(TREE->path, rootDir);
+        /*
+        // Chargement de l'arbre en mémoire
+        load(TREE, TREE->path);
+        /**/
+        printf("treeload\n");
+    }
+    treesearch();
+}
+
+void treeunload()
 {
     //unload(TREE);
-    printf("Signal %d bien recu\n", s);
+    printf("treeunload\n");
+    exit(0);
+}
+
+void setPid(){
+    pid_t pid = getpid();
+    loadConf(confFile, &pidFile, "pidfile");
+    writeInt(pidFile, pid);
+    printf("setPid\n");
 }
 
 int main()
 {
+    setPid();
+
     signal(SIGHUP, treeload);
     signal(SIGTERM, treeunload);
 

@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
   Folder TREE = (Folder)malloc(sizeof(struct Element));
 
   // Chargement des données dans le fichier de configuration
-  loadConf(configFile, &rootPath);
+  loadConf(configFile, &rootPath, "rootdir");
   printf("Le répertoire racine est %s\n", rootPath);
 
   // Affectation du chemin au répertoire racine
@@ -40,10 +40,10 @@ int main(int argc, char *argv[])
   if (TREE != NULL) // Si la racine est pleine
   {
     printf("La racine est pleine.\n");
-    /*
+    
     printf("\nArborescence des répertoires sous %s :\n", TREE->path);
-    displayTree(TREE);
-    */
+    //displayTree(TREE);
+    /**/
   }
   else // Si elle est vide
     printf("La racine est vide !\n");
@@ -62,13 +62,14 @@ int main(int argc, char *argv[])
       printf("Il correspond au nom du dossier à rechercher.\n");
     }
     printf("Recherche de %s dans l'arborescence ...\n", argv[1]);
+    sleep(1);
     search(TREE, argv[1]);
   }
 
   // Déchargement des données en mémoire
   printf("Libération de la mémoire ...\n");
   sleep(1);
-  unload(TREE);
+  //unload(TREE);
 
   printf("==== END ====\n");
 
