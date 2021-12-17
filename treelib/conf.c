@@ -62,28 +62,38 @@ void readText(string filename, string *returnVal)
   FILE *file;
   string line = "";
   file = fopen(filename, "r");
-  while (1)
+  if (file != NULL)
   {
-    if (fgets(line, 150, file) == NULL)
-      break;
-    if (sscanf(line, "%s", *returnVal) != 4) // On sélectionne l'expression entrée en paramètre
-      ;
-    //printf("%s\n", returnVal);
+    while (1)
+    {
+      if (fgets(line, 150, file) == NULL)
+        break;
+      if (sscanf(line, "%s", *returnVal) != 4) // On sélectionne l'expression entrée en paramètre
+        ;
+      //printf("%s\n", returnVal);
+    }
   }
+  else
+    printf("Fichier %s introuvable\n", filename);
 }
 
 void readInt(string filename, int *returnVal)
 {
-    // Ouverture du fichier et lecture du contenu
+  // Ouverture du fichier et lecture du contenu
   FILE *file;
   string line = "";
   file = fopen(filename, "r");
-  while (1)
+  if (file != NULL)
   {
-    if (fgets(line, 150, file) == NULL)
-      break;
-    if (sscanf(line, "%d", returnVal) != 4) // On sélectionne l'expression entrée en paramètre
-      ;
-    //printf("%d\n", *returnVal);
+    while (1)
+    {
+      if (fgets(line, 150, file) == NULL)
+        break;
+      if (sscanf(line, "%d", returnVal) != 4) // On sélectionne l'expression entrée en paramètre
+        ;
+      //printf("%d\n", *returnVal);
+    }
   }
+  else
+    printf("Fichier %s introuvable\n", filename);
 }

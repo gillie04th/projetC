@@ -11,10 +11,12 @@ void treesearch()
     string data;
     loadConf(confFile, &dataFile, "datafile");
     readText(dataFile, &data);
-    printf("%s\n", data);
+    //printf("%s\n", data);
+    printf("Recherche de %s dans l'arborescence :\n", data);
     search(TREE, data);
     //printf("Erreur de chargement du répertoire");
-    printf("treesearch\n");
+    //printf("treesearch\n");
+    printf("Attente de l'instructin suivante ...\n");
 }
 
 void treeload()
@@ -30,15 +32,16 @@ void treeload()
         // Chargement de l'arbre en mémoire
         load(TREE, TREE->path);
         /**/
-        printf("treeload\n");
+        //printf("treeload\n");
     }
     treesearch();
 }
 
 void treeunload()
 {
+    printf("Fermeture de treeload\n");
     unload(TREE);
-    printf("treeunload\n");
+    //printf("treeunload\n");
     
     exit(0);
 }
@@ -48,12 +51,13 @@ void setPid()
     pid_t pid = getpid();
     loadConf(confFile, &pidFile, "pidfile");
     writeInt(pidFile, pid);
-    printf("setPid\n");
+    //printf("setPid\n");
 }
 
 int main()
 {
     setPid();
+    printf("Attente du signal ...\n");
 
     signal(SIGUSR1, treeunload);
     signal(SIGHUP, treeload);
