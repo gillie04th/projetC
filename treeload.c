@@ -4,16 +4,16 @@
 
 // Initialisation des variables
 Folder TREE;
-string confFile = "tree.conf", pidFile, rootDir;
+string confFile = "tree.conf", pidFile, dataFile, rootDir;
 
 void treesearch()
 {
-    string dataFile;
+    string data;
     loadConf(confFile, &dataFile, "datafile");
-    if (TREE != NULL)
-        search(TREE, dataFile);
-    else
-        printf("Erreur de chargement du répertoire");
+    readText(dataFile, &data);
+    printf("%s\n", data);
+    search(TREE, data);
+    //printf("Erreur de chargement du répertoire");
     printf("treesearch\n");
 }
 
@@ -27,7 +27,6 @@ void treeload()
         TREE = (Folder)malloc(sizeof(struct Element));
         // Affectation du chemin au répertoire racine
         strcpy(TREE->path, rootDir);
-        /*
         // Chargement de l'arbre en mémoire
         load(TREE, TREE->path);
         /**/
@@ -38,12 +37,14 @@ void treeload()
 
 void treeunload()
 {
-    //unload(TREE);
+    unload(TREE);
     printf("treeunload\n");
+    
     exit(0);
 }
 
-void setPid(){
+void setPid()
+{
     pid_t pid = getpid();
     loadConf(confFile, &pidFile, "pidfile");
     writeInt(pidFile, pid);
@@ -54,8 +55,8 @@ int main()
 {
     setPid();
 
+    signal(SIGUSR1, treeunload);
     signal(SIGHUP, treeload);
-    signal(SIGTERM, treeunload);
 
     for (;;)
         ;
