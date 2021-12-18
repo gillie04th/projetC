@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <signal.h>
 
+/**
+ * Auteur : GILLIER Théophile
+*/
+
 // Initialisation des variables
 Folder TREE;
 string confFile = "tree.conf", pidFile, dataFile, rootDir;

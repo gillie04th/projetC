@@ -17,3 +17,6 @@ Le programme **treesearch** peut également fermer le programme **treeload** en 
 	ex : ./treesearch --close
 
 Toutes les opérations lancées depuis **treesearch** auront pour effet de générer des réponses de **treeload**, notamment les affichages des résultats, et ce dans le terminal ou est exécuté **treeload**.
+
+## Auteur
+- [GILLIER Théophile](https://github.com/gillie04th)

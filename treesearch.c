@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <signal.h>
 
+/**
+ * Auteur : GILLIER Théophile
+*/
+
 // Initialisation des variables
 string confFile = "tree.conf", pidFile, dataFile;
 int pid;
@@ -29,7 +33,7 @@ int main(int argc, char *argv[])
       sleep(1);
       printf("Il correspond au nom du dossier à rechercher\n");
     }
-    /*== Condition de fermeture */
+    /* Condition de fermeture */
     char *param = "--close";
     // Si le paramètre passé est --close
     if (strcmp(argv[1], param) == 0)
