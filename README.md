@@ -1,7 +1,7 @@
 # Configuration de l'application
 
 Vous pouvez effectuer les commandes `make` manuellement, ou utiliser le script fourni, **setup.sh**.
-Il vous permettra de compiler et lancer le programme automatiquement dans un second terminal :
+Il vous permettra de compiler et lancer le programme automatiquement dans un second terminal (nécessite d'installer le paquet gnome-terminal) :
 
     ./setup.sh
 
